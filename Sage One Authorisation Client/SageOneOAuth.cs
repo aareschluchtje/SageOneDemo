@@ -14,11 +14,11 @@ namespace Sage_One_Authorisation_Client
     {
         private const string AUTHORIZE_URL      = "https://www.sageone.com/oauth2/auth";        // Authorisation URL
         private const string ACCESS_TOKEN_URL   = "https://api.sageone.com/oauth2/token";       // Acess Token URL
-        private const string CALLBACK_URL       = "http://localhost:59793/callback.aspx";       // Call back URL - this should match the Callback URL reigstered against your application on https://developers.sageone.com/
+        private const string CALLBACK_URL       = "http://localhost/SageOneDemo/callback.aspx";       // Call back URL - this should match the Callback URL reigstered against your application on https://developers.sageone.com/
 
-        private string _clientID                = "";                             // Client ID - this should match the Client ID reigstered against your application on https://developers.sageone.com/
-        private string _clientSSecret           = "YOUR_CLIENT_SECRET";                         // Client Secret - this should match the Client Secret reigstered against your application on https://developers.sageone.com/
-        private string _signingSecret           = "YOUR_SIGNING_SECRET";                        // Signing Secret - this should match the Signing Secret reigstered against your application on https://developers.sageone.com/
+        private string _clientID                = "de279371cd1ec1912dd7";                             // Client ID - this should match the Client ID reigstered against your application on https://developers.sageone.com/
+        private string _clientSSecret           = "ee26bb715b89e72dc201c2c03fbad028ffe6997d";                         // Client Secret - this should match the Client Secret reigstered against your application on https://developers.sageone.com/
+        private string _signingSecret           = "03ce0ae8d149bd51d895daacad524320426be0ed";                        // Signing Secret - this should match the Signing Secret reigstered against your application on https://developers.sageone.com/
     
         private string _token = "";
         private string _code = "";
