@@ -11,7 +11,7 @@ namespace Sage_One_Authorisation_Client.Contact_Helpers
     {
         private SageOneOAuth oauth = new SageOneOAuth();
 
-        private Uri contactUri = new Uri("https://api.sageone.com/accounts/v1/contacts/");
+        private Uri contactUri = new Uri("https://api.sageone.com/accounts/v2/contacts/");
         
         public ContactGetHeader GetContacts(string token)
         {

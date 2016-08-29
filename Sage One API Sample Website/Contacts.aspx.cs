@@ -42,6 +42,8 @@ namespace Sage_One_API_Sample_Website
 
             ListBoxContacts.Items.Clear();
 
+            
+
             for (int i = 0; i < contactHeader.Contacts.Count; i++)
             {
                 contact = contactHeader.Contacts[i];

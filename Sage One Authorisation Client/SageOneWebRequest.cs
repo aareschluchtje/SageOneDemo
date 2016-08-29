@@ -226,7 +226,7 @@ namespace Sage_One_Authorisation_Client
             IEnumerable<string> sortedParams =
               from p in requestBody              
               select p.Key + "=" + p.Value;
-
+            
             // Add the ampersand delimiter and then URL-encode
             string encodedParams = String.Join("&", sortedParams);            
             return encodedParams;
