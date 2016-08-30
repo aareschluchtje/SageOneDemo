@@ -14,19 +14,19 @@ namespace Sage_One_Authorisation_Client
     {
         public enum Method { GET, POST, PUT, DELETE };
 
-        public string GetData( Uri url, string token, string signingSecret )
+        public string GetData(Uri url, string token, string signingSecret)
         {
             // Create the nonce to be used by the request
-            string nonce = GenerateNonce();      
-            
+            string nonce = GenerateNonce();
+
             // Create the web request            
             HttpWebRequest webRequest = System.Net.WebRequest.Create(url) as HttpWebRequest;
 
             // Generate a signature
             string signature = SageOneAPIRequestSigner.GenerateSignature("GET", url, null, signingSecret, token, nonce);
-            
+
             // Set the request headers
-            SetHeaders(Method.GET, webRequest, token, signature, nonce );
+            SetHeaders(Method.GET, webRequest, token, signature, nonce);
 
             // Send the GET request
             return GetRequest(webRequest);
@@ -60,15 +60,15 @@ namespace Sage_One_Authorisation_Client
             }
         }
 
-       
 
-        public string PutData(Uri url, List<KeyValuePair<string, string>> requestBody, string token, string signingSecret )
+
+        public string PutData(Uri url, List<KeyValuePair<string, string>> requestBody, string token, string signingSecret)
         {
             // Create the nonce to be used by the request
             string nonce = GenerateNonce();
 
             // Create the web request 
-            HttpWebRequest webRequest = System.Net.WebRequest.Create( url ) as HttpWebRequest;
+            HttpWebRequest webRequest = System.Net.WebRequest.Create(url) as HttpWebRequest;
 
             // Generate a signature
             string signature = SageOneAPIRequestSigner.GenerateSignature("PUT", url, requestBody, signingSecret, token, nonce);
@@ -83,7 +83,7 @@ namespace Sage_One_Authorisation_Client
             return SendRequest(webRequest, putParams);
         }
 
-        public string DeleteData( Uri baseurl, string token, string signingSecret)
+        public string DeleteData(Uri baseurl, string token, string signingSecret)
         {
             // Create the nonce to be used by the request
             string nonce = GenerateNonce();
@@ -101,8 +101,8 @@ namespace Sage_One_Authorisation_Client
             return GetRequest(webRequest);
         }
 
-        
-        private void SetHeaders ( Method method, HttpWebRequest webRequest, string accessToken,string signature, string nonce )
+
+        private void SetHeaders(Method method, HttpWebRequest webRequest, string accessToken, string signature, string nonce)
         {
             // Set the required header values on the web request
             webRequest.AllowAutoRedirect = true;
@@ -119,46 +119,46 @@ namespace Sage_One_Authorisation_Client
                 string authorization = String.Concat("Bearer ", accessToken);
                 webRequest.Headers.Add("Authorization", authorization);
             }
-            
+
             // Set the request method verb
-            switch ( method )
+            switch (method)
             {
-                case Method.GET: 
+                case Method.GET:
                     webRequest.Method = "GET";
                     break;
-                                
-                case Method.POST: 
+
+                case Method.POST:
                     webRequest.Method = "POST";
                     break;
-                
-                case Method.PUT: 
+
+                case Method.PUT:
                     webRequest.Method = "PUT";
                     break;
 
-                case Method.DELETE: 
+                case Method.DELETE:
                     webRequest.Method = "DELETE";
                     break;
             }
-            
-            
+
+
         }
 
-        private string GetRequest( HttpWebRequest webRequest)
-        {            
+        private string GetRequest(HttpWebRequest webRequest)
+        {
             string responseData = "";
-            responseData = GetWebResponse( webRequest );
-            webRequest = null;            
+            responseData = GetWebResponse(webRequest);
+            webRequest = null;
             return responseData;
         }
 
-        private string SendRequest( HttpWebRequest webRequest, string postData )
-        {              
+        private string SendRequest(HttpWebRequest webRequest, string postData)
+        {
             StreamWriter requestWriter = null;
             requestWriter = new StreamWriter(webRequest.GetRequestStream());
-            
+
             try
             {
-                requestWriter.Write(postData);                
+                requestWriter.Write(postData);
             }
             catch
             {
@@ -193,12 +193,12 @@ namespace Sage_One_Authorisation_Client
                     text = sr.ReadToEnd();
                 }
 
-                throw new Exception(text,webex);
-                
+                throw new Exception(text, webex);
+
             }
             catch (Exception ex)
             {
-                string message = ex.Message; 
+                string message = ex.Message;
             }
             finally
             {
@@ -210,25 +210,25 @@ namespace Sage_One_Authorisation_Client
             return responseData;
         }
 
-              
+
         public string GenerateNonce()
         {
             RandomNumberGenerator rng = RNGCryptoServiceProvider.Create();
             Byte[] output = new Byte[32];
             rng.GetBytes(output);
-            return Convert.ToBase64String(output);       
+            return Convert.ToBase64String(output);
         }
-       
+
         private string ConvertPostParams(List<KeyValuePair<string, string>> requestBody)
         {
             IEnumerable<KeyValuePair<string, string>> kvpParams = requestBody;
             // Sort the parameters
             IEnumerable<string> sortedParams =
-              from p in requestBody              
+              from p in requestBody
               select p.Key + "=" + p.Value;
-            
+
             // Add the ampersand delimiter and then URL-encode
-            string encodedParams = String.Join("&", sortedParams);            
+            string encodedParams = String.Join("&", sortedParams);
             return encodedParams;
 
         }

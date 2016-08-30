@@ -86,12 +86,22 @@ namespace Sage_One_API_Sample_Website
             
         }
 
+        protected void ListBoxInvoices_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string selectedAccount = ListBoxInvoices.SelectedItem.Value.ToString();
+            string text = ListBoxInvoices.SelectedItem.Text.ToString();
+            string[] accountValues = text.Split(',');
+            //txtContactName.Text = contactValues[1];
+            txtCompanyName.Text = accountValues[0];
+            txtContactTypeID.Text = accountValues[4];
+        }
+
         protected void btnUpdateContact_Click(object sender, EventArgs e)
         {
             string token = (string)Session["token"];
             ContactManager contactManager = new ContactManager();
             string result = contactManager.UpdateContact(ListBoxContacts.SelectedItem.Value.ToString(), 
-                "" , txtCompanyName.Text, "", "", 
+                txtContactName.Text , txtCompanyName.Text, "", "", 
                 Int32.Parse(txtContactTypeID.Text), token);
 
             ListContacts();
@@ -111,6 +121,49 @@ namespace Sage_One_API_Sample_Website
             txtCompanyName.Text = "";
             txtContactName.Text = "";
             txtContactTypeID.Text = "";
+        }
+
+        protected void btnUpdateInvoice_Click(object sender, EventArgs e)
+        {
+            string token = (string)Session["token"];
+            ContactManager contactManager = new ContactManager();
+            string result = contactManager.UpdateContact(ListBoxContacts.SelectedItem.Value.ToString(),
+                txtContactName.Text, txtCompanyName.Text, "", "",
+                Int32.Parse(txtContactTypeID.Text), token);
+
+            ListContacts();
+        }
+
+        protected void btnDeleteInvoice_Click(object sender, EventArgs e)
+        {
+            string token = (string)Session["token"];
+            ContactManager contactManager = new ContactManager();
+            string result = contactManager.DeleteContact(ListBoxContacts.SelectedItem.Value.ToString(), token);
+
+            ListContacts();
+        }
+
+        protected void btnClearInvoice_Click(object sender, EventArgs e)
+        {
+            txtCompanyName.Text = "";
+            txtContactName.Text = "";
+            txtContactTypeID.Text = "";
+        }
+
+        protected void btnCreateInvoice_Click(object sender, EventArgs e)
+        {
+            string contactName = txtContactName.Text;
+            string companyName = txtCompanyName.Text;
+            int contactTypeID = Int32.Parse(txtContactTypeID.Text);
+
+            string token = (string)Session["token"];
+
+            ContactManager contactManager = new ContactManager();
+
+            string result = contactManager.CreateContact(contactName, companyName, "", "", contactTypeID, token);
+
+            ListContacts();
+
         }
     }
 }
