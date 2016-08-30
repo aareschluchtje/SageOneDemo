@@ -94,9 +94,9 @@ namespace Sage_One_Authorisation_Client.Contact_Helpers
             List<KeyValuePair<string, string>> postData = new List<KeyValuePair<string, string>> {
               new KeyValuePair<string,string>("contact[name]", name),
               new KeyValuePair<string,string>("contact[email]",email),
-              new KeyValuePair<string,string>("contact[contact_type_id]",contactTypeID.ToString()),
+              //new KeyValuePair<string,string>("contact[contact_type_id]",contactTypeID.ToString()),
               new KeyValuePair<string,string>("contact[telephone]",telephone),
-              new KeyValuePair<string,string>("contact[company_name]",companyName) };
+              new KeyValuePair<string,string>("contact[companys]",companyName) };
 
             string _return = webRequest.PutData(specificContactUri, postData, token, oauth.SigningSecret);
 

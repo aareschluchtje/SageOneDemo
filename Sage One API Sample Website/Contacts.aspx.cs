@@ -47,9 +47,9 @@ namespace Sage_One_API_Sample_Website
             for (int i = 0; i < contactHeader.Contacts.Count; i++)
             {
                 contact = contactHeader.Contacts[i];
-                ContactType type = contact.ContactType;
+                List<ContactType> types = contact.ContactTypes;
 
-                string contactTypeID = type.Id.ToString();
+                string contactTypeID = types[0].Id.ToString();
 
                 listText = contact.CompanyName + "," + contact.Name + "," + contact.Email + "," + contact.Telephone + "," + contactTypeID;
 
@@ -61,7 +61,7 @@ namespace Sage_One_API_Sample_Website
 
         protected void btnCreateContact_Click(object sender, EventArgs e)
         {
-            string contactName = ""; //txtContactName.Text;
+            string contactName = txtContactName.Text;
             string companyName = txtCompanyName.Text;
             int contactTypeID = Int32.Parse(txtContactTypeID.Text);
 
@@ -109,7 +109,7 @@ namespace Sage_One_API_Sample_Website
         protected void btnClear_Click(object sender, EventArgs e)
         {
             txtCompanyName.Text = "";
-            //txtContactName.Text = "";
+            txtContactName.Text = "";
             txtContactTypeID.Text = "";
         }
     }

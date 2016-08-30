@@ -40,8 +40,8 @@ namespace Sage_One_Authorisation_Client.Contact_Helpers
         [JsonProperty("id")]
         public int Id { get; set; }
 
-        [JsonProperty("contact_type")]
-        public ContactType ContactType { get; set; }
+        [JsonProperty("contact_types")]
+        public List<ContactType> ContactTypes { get; set; }
     }
 
     public abstract class Contact
@@ -49,7 +49,7 @@ namespace Sage_One_Authorisation_Client.Contact_Helpers
         [JsonProperty("name")]
         public string Name { get; set; }
 
-        [JsonProperty("company_name")]
+        [JsonProperty("company")]
         public string CompanyName { get; set; }
 
         [JsonProperty("email")]
