@@ -73,11 +73,12 @@ namespace Sage_One_Authorisation_Client.Contact_Helpers
             SageOneWebRequest webRequest = new SageOneWebRequest();
 
             List<KeyValuePair<string, string>> postData = new List<KeyValuePair<string, string>> {
-              new KeyValuePair<string,string>("contact[name]", name),
-              new KeyValuePair<string,string>("contact[email]",email),
-              new KeyValuePair<string,string>("contact[contact_type_id]",contactTypeID.ToString()),
-              new KeyValuePair<string,string>("contact[telephone]",telephone),
-              new KeyValuePair<string,string>("contact[company_name]",companyName) };
+                      new KeyValuePair<string,string>("contact[name]=", name),
+                      new KeyValuePair<string,string>("contact[email]=",email),
+                      new KeyValuePair<string,string>("contact[contact_types]=",contactTypeID.ToString()),
+                      new KeyValuePair<string,string>("contact[telephone]=",telephone),
+                      new KeyValuePair<string,string>("contact[company_name]=",companyName)
+            };
 
             string _return = webRequest.PostData(contactUri, postData, token, oauth.SigningSecret);
 
@@ -94,7 +95,7 @@ namespace Sage_One_Authorisation_Client.Contact_Helpers
             List<KeyValuePair<string, string>> postData = new List<KeyValuePair<string, string>> {
               new KeyValuePair<string,string>("contact[name]", name),
               new KeyValuePair<string,string>("contact[email]",email),
-              //new KeyValuePair<string,string>("contact[contact_type_id]",contactTypeID.ToString()),
+              new KeyValuePair<string,string>("contact[contact_type_id]",contactTypeID.ToString()),
               new KeyValuePair<string,string>("contact[telephone]",telephone),
               new KeyValuePair<string,string>("contact[companys]",companyName) };
 
