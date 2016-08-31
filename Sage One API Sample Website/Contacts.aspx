@@ -68,19 +68,19 @@
      <div class="row">
         <div class="col-md-4">
             <asp:Label ID="Label7" runat="server" Text="Contact Name"></asp:Label>
-            <asp:TextBox ID="TextBox4" runat="server"></asp:TextBox>
+            <asp:TextBox ID="TextInvoiceContactName" runat="server"></asp:TextBox>
         </div>
      </div>        
       <div class="row">
         <div class="col-md-4">
-            <asp:Label ID="Label8" runat="server" Text="Company Name"></asp:Label>
-            <asp:TextBox ID="TextBox5" runat="server"></asp:TextBox>
+            <asp:Label ID="Label8" runat="server" Text="Payment Status"></asp:Label>
+            <asp:TextBox ID="TextPaymentStatus" runat="server"></asp:TextBox>
         </div>
      </div>
      <div class="row">
         <div class="col-md-4"> 
-            <asp:Label ID="Label9" runat="server" Text="Contact Type ID ( 1 = Customer, 2 = Supplier)"></asp:Label>
-            <asp:TextBox ID="TextBox6" runat="server"></asp:TextBox>
+            <asp:Label ID="Label9" runat="server" Text="Date"></asp:Label>
+            <asp:TextBox ID="TextDate" runat="server"></asp:TextBox>
        </div>
      </div>
      <br />

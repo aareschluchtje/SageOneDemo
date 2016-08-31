@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Sage_One_Authorisation_Client;
 using Sage_One_Authorisation_Client.Contact_Helpers;
+using Sage_One_Authorisation_Client.Invoice_Helpers;
 
 namespace Sage_One_API_Sample_Website
 {
@@ -16,6 +17,7 @@ namespace Sage_One_API_Sample_Website
             if (Page.IsPostBack == false)
             {
                 ListContacts();
+                ListInvoices();
             }
         }
 
@@ -32,6 +34,21 @@ namespace Sage_One_API_Sample_Website
             ContactGetHeader contactHeader = contactManager.GetContacts(token);
 
             DisplayContacts(contactHeader);
+        }
+
+        private void ListInvoices()
+        {
+            string token = (string)Session["token"];
+
+            TextInvoiceContactName.Text = "";
+            TextPaymentStatus.Text = "";
+            TextDate.Text = "";
+
+            InvoiceManager invoiceManager = new InvoiceManager();
+            
+            InvoiceGetHeader invoiceHeader = invoiceManager.GetInvoices(token);
+
+            DisplayInvoices(invoiceHeader);
         }
 
         private void DisplayContacts(ContactGetHeader contactHeader)
@@ -56,6 +73,31 @@ namespace Sage_One_API_Sample_Website
                 item = new ListItem(listText, contact.Id.ToString());
 
                 this.ListBoxContacts.Items.Add(item);
+            }
+        }
+
+        private void DisplayInvoices(InvoiceGetHeader invoiceHeader)
+        {
+            string listText;
+            ListItem item;
+            InvoiceToGet invoice;
+
+            ListBoxInvoices.Items.Clear();
+
+
+
+            for (int i = 0; i < invoiceHeader.Invoices.Count; i++)
+            {
+                invoice = invoiceHeader.Invoices[i];
+                //List<InvoiceType> types = invoice.InvoiceTypes;
+
+                string status = invoice.Status.Name;
+
+                listText = invoice.Id + "," + invoice.ContactName + "," + invoice.Status.Name + "," + invoice.ArtefactNumberPrefix + "," + invoice.date;
+
+                item = new ListItem(listText, invoice.Id.ToString());
+
+                this.ListBoxInvoices.Items.Add(item);
             }
         }
 
@@ -90,10 +132,10 @@ namespace Sage_One_API_Sample_Website
         {
             string selectedAccount = ListBoxInvoices.SelectedItem.Value.ToString();
             string text = ListBoxInvoices.SelectedItem.Text.ToString();
-            string[] accountValues = text.Split(',');
-            //txtContactName.Text = contactValues[1];
-            txtCompanyName.Text = accountValues[0];
-            txtContactTypeID.Text = accountValues[4];
+            string[] invoiceValues = text.Split(',');
+            TextPaymentStatus.Text = invoiceValues[2];
+            TextInvoiceContactName.Text = invoiceValues[1];
+            TextDate.Text = invoiceValues[4];
         }
 
         protected void btnUpdateContact_Click(object sender, EventArgs e)
@@ -126,10 +168,10 @@ namespace Sage_One_API_Sample_Website
         protected void btnUpdateInvoice_Click(object sender, EventArgs e)
         {
             string token = (string)Session["token"];
-            ContactManager contactManager = new ContactManager();
-            string result = contactManager.UpdateContact(ListBoxContacts.SelectedItem.Value.ToString(),
-                txtContactName.Text, txtCompanyName.Text, "", "",
-                Int32.Parse(txtContactTypeID.Text), token);
+            InvoiceManager invoiceManager = new InvoiceManager();
+            string result = invoiceManager.UpdateInvoice(ListBoxInvoices.SelectedItem.Value.ToString(),
+                TextInvoiceContactName.Text, null, "", "",
+                TextDate.Text, token);
 
             ListContacts();
         }
@@ -137,32 +179,32 @@ namespace Sage_One_API_Sample_Website
         protected void btnDeleteInvoice_Click(object sender, EventArgs e)
         {
             string token = (string)Session["token"];
-            ContactManager contactManager = new ContactManager();
-            string result = contactManager.DeleteContact(ListBoxContacts.SelectedItem.Value.ToString(), token);
+            InvoiceManager invoiceManager = new InvoiceManager();
+            string result = invoiceManager.DeleteInvoice(ListBoxInvoices.SelectedItem.Value.ToString(), token);
 
-            ListContacts();
+            ListInvoices();
         }
 
         protected void btnClearInvoice_Click(object sender, EventArgs e)
         {
-            txtCompanyName.Text = "";
-            txtContactName.Text = "";
-            txtContactTypeID.Text = "";
+            TextInvoiceContactName.Text = "";
+            TextPaymentStatus.Text = "";
+            TextDate.Text = "";
         }
 
         protected void btnCreateInvoice_Click(object sender, EventArgs e)
         {
-            string contactName = txtContactName.Text;
-            string companyName = txtCompanyName.Text;
-            int contactTypeID = Int32.Parse(txtContactTypeID.Text);
+            string invoiceName = TextInvoiceContactName.Text;
+            string paymentStatus = TextPaymentStatus.Text;
+            string date = TextDate.Text;
 
             string token = (string)Session["token"];
 
-            ContactManager contactManager = new ContactManager();
+            InvoiceManager invoiceManager = new InvoiceManager();
 
-            string result = contactManager.CreateContact(contactName, companyName, "", "", contactTypeID, token);
+            string result = invoiceManager.CreateInvoice("Alex", null, "", "671814", date, token);
 
-            ListContacts();
+            ListInvoices();
 
         }
     }

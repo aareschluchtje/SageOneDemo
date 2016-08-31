@@ -46,6 +46,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Invoice Helper\LineItem.cs" />
+    <Compile Include="Invoice Helper\InvoiceHeader.cs" />
+    <Compile Include="Invoice Helper\InvoiceManager.cs" />
+    <Compile Include="Invoice Helper\PaymentStatus.cs" />
     <Compile Include="Contact Helper\ContactHeader.cs" />
     <Compile Include="Contact Helper\ContactMainAddress.cs" />
     <Compile Include="Contact Helper\ContactManager.cs" />

@@ -209,8 +209,7 @@ namespace Sage_One_Authorisation_Client
 
             return responseData;
         }
-
-
+        
         public string GenerateNonce()
         {
             RandomNumberGenerator rng = RNGCryptoServiceProvider.Create();
