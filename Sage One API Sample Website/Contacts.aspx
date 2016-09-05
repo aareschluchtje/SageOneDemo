@@ -8,7 +8,8 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <div class="row">
+<%--        <div class="col-md-4">
+            <div class="row">
         <div class="col-md-4">
             <h2>List Contacts</h2>
             <p>
@@ -47,8 +48,8 @@
             <asp:Button ID="btnCreateContact" runat="server" Text="Create" OnClick="btnCreateContact_Click" />
             <asp:Button ID="btnUpdateContact" runat="server" Text="Update" OnClick="btnUpdateContact_Click" />
             <asp:Button ID="btnDeleteContact" runat="server" Text="Delete" OnClick="btnDeleteContact_Click" />
-        </div>
-     </div>     
+        </div>     
+    </div>
 
 
     <div class="row">
@@ -91,7 +92,41 @@
             <asp:Button ID="Button7" runat="server" Text="Update" OnClick="btnUpdateInvoice_Click" />
             <asp:Button ID="Button8" runat="server" Text="Delete" OnClick="btnDeleteInvoice_Click" />
         </div>
-     </div>     
+     </div> 
+        </div>--%>
+
+
+    <div class="row">
+        <div class="col-md-4">
+            <h2>Sage One API Tester</h2>
+            <p>
+               Package creator
+            </p>
+            <asp:Label ID="Label10" runat="server" Text="URL"></asp:Label>
+            <asp:TextBox ID="TextURL" runat="server" Width="450px" Text="https://api.sageone.com/accounts/v2/sales_invoices">https://api.sageone.com/accounts/v2/sales_invoices</asp:TextBox>
+            <h2>Headers </h2>
+             <asp:TextBox ID="HeadersBox" TextMode="MultiLine" runat="server" Height="200px" Width="800px">
+             </asp:TextBox>
+        </div>
+    </div>
+    <br />   
+        <asp:TextBox ID="TextBody" TextMode="MultiLine" runat="server" Height="500px" Width="1000px"></asp:TextBox>    
+     <br />
+     <br />
+     <div class="row">
+        <div class="col-md-4"> 
+            <asp:Button ID="Button2" runat="server" Text="Create" OnClick="btnCreatePackage_Click" />
+        </div>
+
+     </div> 
+        <div class="row">
+            <br />
+            <h2>Response</h2>
+        <div class="col-md-4"> 
+            <asp:TextBox ID="ResponseBox" TextMode="MultiLine" runat="server" Height="200px" Width="800px">
+             </asp:TextBox>
+        </div>
+     </div> 
     </form>
    
 </body>

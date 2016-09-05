@@ -14,6 +14,8 @@ namespace Sage_One_Authorisation_Client
     {
         public enum Method { GET, POST, PUT, DELETE };
 
+        public HttpWebRequest webRequestinfo = null;
+
         public string GetData(Uri url, string token, string signingSecret)
         {
             // Create the nonce to be used by the request
@@ -51,17 +53,24 @@ namespace Sage_One_Authorisation_Client
                 // Convert the requestBody into post parameters 
                 string postParams = ConvertPostParams(requestBody);
 
+                webRequestinfo = webRequest;
+
                 // Send the POST request
                 return SendRequest(webRequest, postParams);
             }
             catch (Exception ex)
             {
-                return ex.Message.ToString();
+                string exceptionMessage = ex.Message.ToString();
+                if(ex.InnerException != null)
+                {
+                    exceptionMessage += ex.InnerException.Message.ToString();
+                }
+                return exceptionMessage;
             }
         }
 
 
-
+        
         public string PutData(Uri url, List<KeyValuePair<string, string>> requestBody, string token, string signingSecret)
         {
             // Create the nonce to be used by the request
