@@ -251,5 +251,19 @@ namespace Sage_One_API_Sample_Website
 
             ResponseBox.Text = _return;
         }
+        protected void btnSendPackage_Click(object sender, EventArgs e)
+        {
+            string url = TextBoxURL2.Text;
+
+            string token = (string)Session["token"];
+
+            SageOneWebRequest webRequest = new SageOneWebRequest();
+
+            Uri packageURI = new Uri(url);
+
+            string _return = webRequest.GetData(packageURI, token, oauth.SigningSecret);
+
+            GetResponseBox.Text = _return;
+        }
     }
 }

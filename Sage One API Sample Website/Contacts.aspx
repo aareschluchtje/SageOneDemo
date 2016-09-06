@@ -103,7 +103,7 @@
                Package creator
             </p>
             <asp:Label ID="Label10" runat="server" Text="URL"></asp:Label>
-            <asp:TextBox ID="TextURL" runat="server" Width="450px" Text="https://api.sageone.com/accounts/v2/sales_invoices">https://api.sageone.com/accounts/v2/sales_invoices</asp:TextBox>
+            <asp:TextBox ID="TextURL" runat="server" Width="450px" Text="https://api.sageone.com/accounts/v2/sales_invoices"></asp:TextBox>
             <h2>Headers </h2>
              <asp:TextBox ID="HeadersBox" TextMode="MultiLine" runat="server" Height="200px" Width="800px">
              </asp:TextBox>
@@ -127,6 +127,17 @@
              </asp:TextBox>
         </div>
      </div> 
+        <div class="col-md-4">
+            <h2> Getter</h2>
+            <asp:Label ID="Label1" runat="server" Text="URL"></asp:Label>
+            <asp:TextBox ID="TextBoxURL2" runat="server" Width="450px" Text="https://api.sageone.com/accounts/v2/sales_invoices"></asp:TextBox>
+            <h2>Response </h2>
+             <asp:TextBox ID="GetResponseBox" TextMode="MultiLine" runat="server" Height="200px" Width="800px">
+             </asp:TextBox>
+        </div>
+        <div class="col-md-4"> 
+            <asp:Button ID="SendButton" runat="server" Text="Send" OnClick="btnSendPackage_Click" />
+        </div>
     </form>
    
 </body>
